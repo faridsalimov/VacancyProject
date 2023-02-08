@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -14,21 +14,23 @@ namespace EmployerNamespace
     {
         public int Id { get; set; }
         public static int StaticId = 1;
+        public string? Username { get; set; }
         public string? Name { get; set; }
         public string? Surname { get; set; }
-        public string? Username { get; set; }
+        public string? Sheher { get; set; }
         public int Phone { get; set; }
         public int Age { get; set; }
         public string? Password { get; set; }
         public List<Vacancy> vacancies = new();
         public List<Notification> notifications = new();
 
-        public Employer(string? username, string? name, string? surname, int phone, int age, string? password)
+        public Employer(string? username, string? name, string? surname, string? sheher, int phone, int age, string? password)
         {
             Id = StaticId++;
             Username = username;
             Name = name;
             Surname = surname;
+            Sheher = sheher;
             Phone = phone;
             Age = age;
             Password = password;
@@ -36,7 +38,7 @@ namespace EmployerNamespace
 
         public override string ToString()
         {
-            return $"Employer ID: {Id}\nUsername: @{Username}\nName: {Name}\nSurname: {Surname}\nPhone: {Phone}\nAge: {Age}\n";
+            return $"Employer ID: {Id}\nUsername: @{Username}\nName: {Name}\nSurname: {Surname}\nSheher: {Sheher}\nPhone: {Phone}\nAge: {Age}\n";
         }
 
         public void AddVacancy(Vacancy vc)
