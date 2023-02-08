@@ -1,4 +1,4 @@
-﻿using EmployerNamespace;
+using EmployerNamespace;
 using VacancyNamespace;
 using WorkerNamespace;
 using CVNamespace;
@@ -17,7 +17,7 @@ void addAlert(string? text, ConsoleColor color)
 }
 
 List<Employer> employers = new();
-Employer e1 = new("faridsalimov", "Farid", "Salimov", 0507388281, 20, "farid123");
+Employer e1 = new("faridsalimov", "Farid", "Salimov", "Baku", 0507388281, 20, "farid123");
 employers.Add(e1);
 
 Vacancy v1 = new("C# Developer Elani", "Herkese salam! Boyuk bir proyekt ucun C# Developeri axtarilir.", e1);
@@ -27,9 +27,9 @@ e1.AddVacancy(v2);
 
 List<Worker> workers = new();
 
-//// Bu kodları programı yoxlamazdan evvel işe salın. İşe saldıqdan sonra comment edebilersiz.
-//Worker w1 = new("fuad38", "Fuad", "Selimov", 12412412, 20, "fuad123", new CV("Backend Developer", "Number 9 School", 652, "Uber, Microsoft, Amazon", "C#, C++, Python", true));
-//Worker w2 = new("rikoo", "Rinat", "Qedimov", 5124100, 28, "riko5757", new CV("Frontend Developer", "Number 2 School", 598, "Instagram, Bolt", "HTML, CSS, Java", true));
+// Bu kodları programı yoxlamazdan evvel işe salın. İşe saldıqdan sonra comment edebilersiz.
+//Worker w1 = new("fuad38", "Fuad", "Selimov", "Xirdalan", 12412412, 20, "fuad123", new CV("Backend Developer", "Number 9 School", 652, "Uber, Microsoft, Amazon", "C#, C++, Python", true));
+//Worker w2 = new("rikoo", "Rinat", "Qedimov", "Shemkir", 5124100, 28, "riko5757", new CV("Frontend Developer", "Number 2 School", 598, "Instagram, Bolt", "HTML, CSS, Java", true));
 //workers.Add(w1);
 //workers.Add(w2);
 //var jsonn = JsonSerializer.Serialize(workers);
@@ -267,6 +267,10 @@ while (true)
                         Console.Write("Enter surname: ");
                         surnamee = Console.ReadLine();
 
+                        string? sheherr;
+                        Console.Write("Enter sheher: ");
+                        sheherr = Console.ReadLine();
+
                         int numberr;
                         Console.Write("Enter number: ");
                         numberr = Convert.ToInt32(Console.ReadLine());
@@ -322,7 +326,7 @@ while (true)
                             goto diplomaselect;
                         }
 
-                        workers.Add(new Worker(usernamee, namee, surnamee, numberr, agee, passwordd, new CV(specialtyy, schooll, score, companiess, skillss, diplomaa)));
+                        workers.Add(new Worker(usernamee, namee, surnamee, sheherr, numberr, agee, passwordd, new CV(specialtyy, schooll, score, companiess, skillss, diplomaa)));
                         var json = JsonSerializer.Serialize(workers);
                         File.WriteAllText("workers.json", json);
 
@@ -408,69 +412,51 @@ while (true)
                     search:
                         if (workers.Count != 0)
                         {
-                            Console.WriteLine("1 - Skill Search\n2 - Diploma Search\n3 - Specialty Search\n4 - Age Search\n5 - Acceptance Score\n6 - Companies Search\n7 - Back");
+                            Console.WriteLine("1 - Name Search\n2 - Surname Search\n3 - Sheher Search\n4 - Age Search\n5 - Specialty Search\n6 - Acceptance Score Search\n7 - Skill Search\n8 - Diploma Search\n9 - Company Search\n0 - Back");
                             key = Console.ReadKey();
 
                             if (key.Key == ConsoleKey.D1)
                             {
                                 Console.Clear();
 
-                                string? skillSearch;
-                                Console.Write("Enter skill: ");
-                                skillSearch = Console.ReadLine();
+                                string? nameSearch;
+                                Console.Write("Enter name: ");
+                                nameSearch = Console.ReadLine();
 
                                 Console.Clear();
-                                var result = workers.Where(wk => wk.Cv.Skills.Contains(skillSearch)).ToList();
-                                result.ForEach(wk => Console.WriteLine(wk + "\n"));
+                                var result = workers.Where(wk => wk.Name.Contains(nameSearch)).ToList();
+                                result.ForEach(wk => Console.WriteLine(wk));
                                 goto search;
                             }
 
                             else if (key.Key == ConsoleKey.D2)
                             {
-                            diplomasearch:
                                 Console.Clear();
 
-                                Console.WriteLine("1 - With a diploma\n2 - Without a diploma");
-                                key = Console.ReadKey();
+                                string? surnameSearch;
+                                Console.Write("Enter surname: ");
+                                surnameSearch = Console.ReadLine();
 
-                                if (key.Key == ConsoleKey.D1)
-                                {
-                                    Console.Clear();
-                                    var result = workers.Where(wk => wk.Cv.Diploma == true).ToList();
-                                    result.ForEach(wk => Console.WriteLine(wk + "\n"));
-                                    goto search;
-                                }
-
-                                else if (key.Key == ConsoleKey.D2)
-                                {
-                                    Console.Clear();
-                                    var result = workers.Where(wk => wk.Cv.Diploma == false).ToList();
-                                    result.ForEach(wk => Console.WriteLine(wk + "\n"));
-                                    goto search;
-                                }
-
-                                else
-                                {
-                                    Console.Clear();
-                                    addAlert("Invilad select!", ConsoleColor.Red);
-                                    goto diplomasearch;
-                                }
+                                Console.Clear();
+                                var result = workers.Where(wk => wk.Surname.Contains(surnameSearch)).ToList();
+                                result.ForEach(wk => Console.WriteLine(wk));
+                                goto search;
                             }
-
+                            
                             else if (key.Key == ConsoleKey.D3)
                             {
                                 Console.Clear();
 
-                                string? specialtySearch;
-                                Console.Write("Enter specialty: ");
-                                specialtySearch = Console.ReadLine();
+                                string? sheherSearch;
+                                Console.Write("Enter surname: ");
+                                sheherSearch = Console.ReadLine();
 
                                 Console.Clear();
-                                var result = workers.Where(wk => wk.Cv.Specialty.Contains(specialtySearch)).ToList();
-                                result.ForEach(wk => Console.WriteLine(wk + "\n"));
+                                var result = workers.Where(wk => wk.Sheher.Contains(sheherSearch)).ToList();
+                                result.ForEach(wk => Console.WriteLine(wk));
                                 goto search;
                             }
-
+                            
                             else if (key.Key == ConsoleKey.D4)
                             {
                                 Console.Clear();
@@ -487,7 +473,7 @@ while (true)
                                 {
                                     Console.Clear();
                                     var result = workers.Where(wk => wk.Age > searchAge).ToList();
-                                    result.ForEach(wk => Console.WriteLine(wk + "\n"));
+                                    result.ForEach(wk => Console.WriteLine(wk));
                                     goto search;
                                 }
 
@@ -495,7 +481,7 @@ while (true)
                                 {
                                     Console.Clear();
                                     var result = workers.Where(wk => wk.Age < searchAge).ToList();
-                                    result.ForEach(wk => Console.WriteLine(wk + "\n"));
+                                    result.ForEach(wk => Console.WriteLine(wk));
                                     goto search;
                                 }
 
@@ -503,7 +489,7 @@ while (true)
                                 {
                                     Console.Clear();
                                     var result = workers.Where(wk => wk.Age == searchAge).ToList();
-                                    result.ForEach(wk => Console.WriteLine(wk + "\n"));
+                                    result.ForEach(wk => Console.WriteLine(wk));
                                     goto search;
                                 }
 
@@ -514,8 +500,22 @@ while (true)
                                     goto boyukkicik;
                                 }
                             }
-
+                            
                             else if (key.Key == ConsoleKey.D5)
+                            {
+                                Console.Clear();
+
+                                string? specialtySearch;
+                                Console.Write("Enter specialty: ");
+                                specialtySearch = Console.ReadLine();
+
+                                Console.Clear();
+                                var result = workers.Where(wk => wk.Cv.Specialty.Contains(specialtySearch)).ToList();
+                                result.ForEach(wk => Console.WriteLine(wk));
+                                goto search;
+                            }
+                            
+                            else if (key.Key == ConsoleKey.D6)
                             {
                                 Console.Clear();
 
@@ -531,7 +531,7 @@ while (true)
                                 {
                                     Console.Clear();
                                     var result = workers.Where(wk => wk.Cv.AcceptanceScore > searchScore).ToList();
-                                    result.ForEach(wk => Console.WriteLine(wk + "\n"));
+                                    result.ForEach(wk => Console.WriteLine(wk));
                                     goto search;
                                 }
 
@@ -539,7 +539,7 @@ while (true)
                                 {
                                     Console.Clear();
                                     var result = workers.Where(wk => wk.Cv.AcceptanceScore < searchScore).ToList();
-                                    result.ForEach(wk => Console.WriteLine(wk + "\n"));
+                                    result.ForEach(wk => Console.WriteLine(wk));
                                     goto search;
                                 }
 
@@ -547,7 +547,7 @@ while (true)
                                 {
                                     Console.Clear();
                                     var result = workers.Where(wk => wk.Cv.AcceptanceScore == searchScore).ToList();
-                                    result.ForEach(wk => Console.WriteLine(wk + "\n"));
+                                    result.ForEach(wk => Console.WriteLine(wk));
                                     goto search;
                                 }
 
@@ -558,8 +558,54 @@ while (true)
                                     goto boyukkicik;
                                 }
                             }
+                            
+                            else if (key.Key == ConsoleKey.D7)
+                            {
+                                Console.Clear();
 
-                            if (key.Key == ConsoleKey.D6)
+                                string? skillSearch;
+                                Console.Write("Enter skill: ");
+                                skillSearch = Console.ReadLine();
+
+                                Console.Clear();
+                                var result = workers.Where(wk => wk.Cv.Skills.Contains(skillSearch)).ToList();
+                                result.ForEach(wk => Console.WriteLine(wk));
+                                goto search;
+                            }
+                            
+                            else if (key.Key == ConsoleKey.D8)
+                            {
+                            diplomasearch:
+                                Console.Clear();
+
+                                Console.WriteLine("1 - With a diploma\n2 - Without a diploma");
+                                key = Console.ReadKey();
+
+                                if (key.Key == ConsoleKey.D1)
+                                {
+                                    Console.Clear();
+                                    var result = workers.Where(wk => wk.Cv.Diploma == true).ToList();
+                                    result.ForEach(wk => Console.WriteLine(wk));
+                                    goto search;
+                                }
+
+                                else if (key.Key == ConsoleKey.D2)
+                                {
+                                    Console.Clear();
+                                    var result = workers.Where(wk => wk.Cv.Diploma == false).ToList();
+                                    result.ForEach(wk => Console.WriteLine(wk));
+                                    goto search;
+                                }
+
+                                else
+                                {
+                                    Console.Clear();
+                                    addAlert("Invilad select!", ConsoleColor.Red);
+                                    goto diplomasearch;
+                                }
+                            }
+                            
+                            else if (key.Key == ConsoleKey.D9)
                             {
                                 Console.Clear();
 
@@ -569,11 +615,11 @@ while (true)
 
                                 Console.Clear();
                                 var result = workers.Where(wk => wk.Cv.Companies.Contains(companySearch)).ToList();
-                                result.ForEach(wk => Console.WriteLine(wk + "\n"));
+                                result.ForEach(wk => Console.WriteLine(wk));
                                 goto search;
                             }
-
-                            else if (key.Key == ConsoleKey.D7)
+                            
+                            else if (key.Key == ConsoleKey.D0)
                             {
                                 Console.Clear();
                                 goto label2;
