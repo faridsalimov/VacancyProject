@@ -1,4 +1,4 @@
-﻿using NotificationNamespace;
+using NotificationNamespace;
 using CVNamespace;
 using System;
 using System.Collections.Generic;
@@ -15,17 +15,19 @@ namespace WorkerNamespace
         public string? Username { get; set; }
         public string? Name { get; set; }
         public string? Surname { get; set; }
+        public string? Sheher { get; set; }
         public int Phone { get; set; }
         public int Age { get; set; }
         public string? Password { get; set; }
         public CV? Cv { get; set; }
 
-        public Worker(string? username, string? name, string? surname, int phone, int age, string? password, CV? cv)
+        public Worker(string? username, string? name, string? surname, string? sheher, int phone, int age, string? password, CV? cv)
         {
             Id = StaticId++;
             Username = username;
             Name = name;
             Surname = surname;
+            Sheher = sheher;
             Phone = phone;
             Age = age;
             Password = password;
@@ -34,7 +36,7 @@ namespace WorkerNamespace
 
         public override string ToString()
         {
-            return $"Worker ID: {Id}\nUsername: @{Username}\nName: {Name}\nSurname: {Surname}\nPhone: {Phone}\nAge: {Age}\n>> CV:\nSpecialty: {Cv.Specialty}\nSchool: {Cv.School}\nAcceptance Score: {Cv.AcceptanceScore}\nCompanies: {Cv.Companies}\nSkills: {Cv.Skills}\nDiploma: {(Cv.Diploma ? "YES" : "NO")}";
+            return $"Worker ID: {Id}\nUsername: @{Username}\nName: {Name}\nSurname: {Surname}\nSheher: {Sheher}\nPhone: {Phone}\nAge: {Age}\n>> CV:\nSpecialty: {Cv.Specialty}\nSchool: {Cv.School}\nAcceptance Score: {Cv.AcceptanceScore}\nCompanies: {Cv.Companies}\nSkills: {Cv.Skills}\nDiploma: {(Cv.Diploma ? "YES\n" : "NO\n")}";
         }
     }
 }
